@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "github.com/vincen320/user-service-grpc/proto";
+
+package user;
+
+service User{
+    rpc CreateUser(UserCreateRequest) returns (UserCreateResponse){}
+    rpc GetUser(GetUserRequest)returns(GetUserResponse){}
+}
+
+message UserCreateRequest{
+    string name=1;
+    string username = 2;
+    string password = 3;
+    string email = 4;
+}
+
+message UserCreateResponse{
+    string id=1;
+    string username =2;
+    string email =3;
+    int64 createdAt =4;
+    string name=5;
+    string message=6;
+}
+
+message GetUserRequest{
+    string search=1;
+}
+
+message GetUserResponse{
+    string id=1;
+    string username =2;
+    string email =3;
+    int64 createdAt =4;
+    string name=5;
+    string message=6;
+}
