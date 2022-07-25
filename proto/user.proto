@@ -1,12 +1,23 @@
 syntax = "proto3";
 
-option go_package = "github.com/vincen320/user-service-grpc/proto";
-
 package user;
 
+import "google/api/annotations.proto";
+
+option go_package = "github.com/vincen320/user-service-grpc/proto";
+
 service User{
-    rpc CreateUser(UserCreateRequest) returns (UserCreateResponse){}
-    rpc GetUser(GetUserRequest)returns(GetUserResponse){}
+    rpc CreateUser(UserCreateRequest) returns (UserCreateResponse){
+        option (google.api.http) = {
+            post: "/v1/user"
+            body: "*" //maksudnya request body
+        };
+    }
+    rpc GetUser(GetUserRequest)returns(GetUserResponse){
+        option (google.api.http) = {
+            get: "/v1/user/{search}" //{search} sesuaikan dengan field di message yang berhubungan dan yang akan diisi (?)
+        };
+    }
 }
 
 message UserCreateRequest{

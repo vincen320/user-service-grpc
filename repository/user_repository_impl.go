@@ -30,7 +30,7 @@ func (us *UserRepositoryImpl) Save(ctx context.Context, User domain.User) (domai
 	if !ok {
 		return User, errors.New("unable convert ID") // 500 Internal Server Error
 	}
-	User.Id = userId.String()
+	User.Id = userId.Hex() //Gunakan .Hex() dibanding .String()
 	return User, nil
 }
 
