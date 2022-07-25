@@ -2,13 +2,14 @@ package app
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func ConnectMongo() (*mongo.Database, error) {
+func ConnectMongo() *mongo.Database {
 	clientOptions := options.Client().
 		SetMaxPoolSize(100).
 		SetMaxConnecting(20).
@@ -18,7 +19,7 @@ func ConnectMongo() (*mongo.Database, error) {
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		return nil, err
+		log.Fatal("cannot connect mongodb", err)
 	}
-	return client.Database("v_user_grpc"), nil
+	return client.Database("v_user_grpc")
 }
